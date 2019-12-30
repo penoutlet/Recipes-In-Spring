@@ -4,28 +4,30 @@ import com.recipethymeleaf.SpringRecipe.domain.Category;
 import com.recipethymeleaf.SpringRecipe.domain.UnitOfMeasure;
 import com.recipethymeleaf.SpringRecipe.repositories.CategoryRepository;
 import com.recipethymeleaf.SpringRecipe.repositories.UnitOfMeasureRepository;
+import com.recipethymeleaf.SpringRecipe.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
-@Component
+@Slf4j
+@Controller
 public class IndexController {
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    private final RecipeService recipeService;
+
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"","/","/index"})
-    public String getIndex(){
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
-
-        System.out.println("Description ID is: " + categoryOptional.get().getId());
-        System.out.println("Unit ID of measure: " + unitOfMeasureOptional.get().getId());
+    public String getIndex(Model model){
+        log.info("Inside controller");
+        System.out.println(recipeService.getRecipes());
+        model.addAttribute("recipes",recipeService.getRecipes());
         return "index";
     }
 

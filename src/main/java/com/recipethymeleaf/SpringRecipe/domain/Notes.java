@@ -1,10 +1,12 @@
 package com.recipethymeleaf.SpringRecipe.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 @Entity
+@EqualsAndHashCode(exclude = {"recipe"})
 @Data
 public class Notes {
 
@@ -13,7 +15,7 @@ public class Notes {
     private Long id;
 
     @OneToOne
-    private Recipe recipes;
+    private Recipe recipe;
     @Lob /** allows large objects, larger than 250 characters */
     private String recipeNotes;
 }

@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <title>Title</title>
         <div th:replace="fragments/bootstrap :: bootstrap"></div>
-
+<!--    <link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>-->
+    <script th:fragment="jquery" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script th:fragment="bootstrapjs"th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<h1> Recettes</h1>
-<table align="center" class="table col-lg-8 table-striped table-dark">
+<div class="container-fluid">
+    <div  class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1> Recipes </h1>
+            </div>
+        <div class="panel-body">
+<table align="center" class="table col-lg-8 table-striped table-dark table-hover" th:if="${not #lists.isEmpty(recipes)}">
     <thead class="thead-dark">
     <th> ID </th>
     <th> Description </th>
@@ -16,10 +24,16 @@
     <tbody>
 
     <tr th:each="recipe : ${recipes}">
+        <!--/*@thymesVar id="recipe" type=com.recipethymeleafSpringRecipe.domain.Recipe" */-->
         <td th:text="${recipe.id}">id</td>
         <td th:text="${recipe.description}"></td>
+        <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View</a> </td>
     </tr>
     </tbody>
 </table>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>

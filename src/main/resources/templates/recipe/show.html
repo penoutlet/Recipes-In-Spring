@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>1 Recipe</title>
+    <div th:replace="fragments/bootstrap :: bootstrap"></div>
+    <div th:replace="index :: jquery"></div>
+    <div th:replace="index :: bootstrapjs"></div>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="jumbotron"></div>
+    <!--/*@thymesVar id="recipe" type=com.recipethymeleafSpringRecipe.domain.Recipe" */-->
+
+    <div class="panel-body">
+    <p class="panel panel-body" th:text="${recipe.description}"></p>
+    <p class="panel" th:text="${recipe.cookTime}"> </p>
+    <p class="panel" th:text="${recipe.prepTime}"> </p>
+    <p class="panel" th:text="${recipe.url}"> </p>
+    <p class="panel" th:text="${recipe.directions}"> </p>
+    </div>
+    <p th:each="ing : ${recipe.ingredientSet}">
+    <p> Ingredient </p>
+    </p>
+
+    <p th:each="cat : ${recipe.categories}" class="panel panel-body">
+<!--    <p th:text="${cat.description}"> </p>-->
+    </p>
+</div>
+
+
+</body>
+</html></p>

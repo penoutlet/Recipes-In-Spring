@@ -22,7 +22,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Set<Recipe> getRecipes() {
-        log.info("In the service");
+        // log.info("In the service");
         Set<Recipe> recipes = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
         return recipes;
@@ -37,6 +37,17 @@ public class RecipeServiceImpl implements RecipeService {
         }
 
         return recipeOptional.get();
+    }
+
+  
+    public void saveOrUpdate(Recipe recipe){
+        
+        recipeRepository.save(recipe);
+    }
+
+    public Long deleteById(Long id){
+        recipeRepository.deleteById(id);
+        return id;
     }
 }
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Add a Recipe</title>
+</head>
+<body>
+
+<form class="form" th:object="${recipe}" th:action="@{/recipe/ +${recipe.id /update}}">
+    <input type="text" th:field="*{description}">
+
+    <input type="submit" value="Create" class="btn btn-primary">
+
+</form> 
+
+</body>
+</html>

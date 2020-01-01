@@ -3,26 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>1 Recipe</title>
-    <div th:replace="fragments/bootstrap :: bootstrap"></div>
     <div th:replace="index :: jquery"></div>
     <div th:replace="index :: bootstrapjs"></div>
+    <div th:replace="fragments/bootstrap :: bootstrap"></div>
 
 </head>
 <body>
-<div class="container-fluid">
-    <div class="jumbotron"></div>
-    <!--/*@thymesVar id="recipe" type=com.recipethymeleafSpringRecipe.domain.Recipe" */-->
+<div th:replace="fragments/topnav :: navbar"></div>
 
-    <div class="panel-body">
-    <p class="panel panel-body" th:text="${recipe.description}"></p>
-    <p class="panel" th:text="${recipe.cookTime}"> </p>
-    <p class="panel" th:text="${recipe.prepTime}"> </p>
-    <p class="panel" th:text="${recipe.url}"> </p>
-    <p class="panel" th:text="${recipe.directions}"> </p>
+<div class="container-fluid">
+    <!--/*@thymesVar id="recipe" type=com.recipethymeleafSpringRecipe.domain.Recipe" */-->
+    <div class="col-lg-6 offset-3 card card-body" align="center">
+        <div class="form-group">
+            <a th:href="@{'/'}" class="btn btn-success col-md-3 offset-8"> Back </a>
+            <a style="margin-top:10px;" th:href="@{'/recipe/' +${recipe.id} +'/update'}" class="btn btn-secondary col-md-3 offset-8"> Edit Recipe</a>
+
+            <em> Description </em>
+    <p class="col-md-3" th:text="${recipe.description}"></p>
+            <em> Cook Time </em>
+            <p class="col-md-3" th:text="${recipe.cookTime}"> </p>
+            <em> Prep Time </em>
+            <p class="col-md-3" th:text="${recipe.prepTime}"> </p>
+            <em> Original URL </em>
+    <p class="col-md-3" th:text="${recipe.url}"> </p>
+            <em> Directions </em>
+    <p class="col-md-3" th:text="${recipe.directions}"> </p>
     </div>
-    <p th:each="ing : ${recipe.ingredientSet}">
-    <p> Ingredient </p>
+
+        <div class="title offset"> <em> Ingredients </em> </div>
+    <ul>
+    <li th:each="ing : ${recipe.ingredientSet}">
+        <p th:text="${ing}"></p>
+        </li>
     </p>
+    </div>
+</div>
 
     <p th:each="cat : ${recipe.categories}" class="panel panel-body">
 <!--    <p th:text="${cat.description}"> </p>-->
